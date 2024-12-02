@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <video autoplay muted loop class="video-bg">
+        <source src="{{ url_for('static', filename='videos/workout.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <h2>Welcome to Yetty's fitness !</h2>
+        <h3>Open 24/7</h3><br>
+        <h3>Login to your account</h3>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <div class="buttons">
+                <input type="submit" value="Login">
+                <button type="button" onclick="window.location.href='/create_account'">Create Account</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

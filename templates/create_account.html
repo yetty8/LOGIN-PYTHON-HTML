@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9f093;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #adcb84;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }   
+        h2 {
+            text-align: center;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+
+            transform: translateX(-50%);
+            color: #120f0f;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 80px;
+            font-weight: bold;
+            margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #83a75c;
+            color: #ffffff;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #adcb84;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #83a75c;
+            color: #ffffff;
+        }
+        .error-message {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .success-message {
+            color: #008000;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Create Account</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Create Account">
+    </form>
+</body>
+</html>
