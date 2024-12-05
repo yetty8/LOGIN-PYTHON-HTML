@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for flash messages
+app.secret_key = 'your_secret_key'  # Required for flash messages and session management
 
 # Dummy user data
 users = {
@@ -48,5 +48,12 @@ def welcome():
     username = request.args.get('username', 'Guest')
     return render_template('welcome.html', username=username)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/logout')
+def logout():
+    if 'username' in session:
+        print("Logout function called")  # Debugging line
+        session.pop('username', None)  # Remove the username from the session
+        flash('You have been logged out.', 'success')  # Optional: flash a message
+    else:
+        flash('You are not logged in.', 'error')  # If the user is not logged in, flash an error message
+    return redirect(url_for('home'))  # Redirect to the home page (login)
